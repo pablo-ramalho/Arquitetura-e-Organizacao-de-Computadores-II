@@ -46,8 +46,8 @@ public class Cache{
         this.tag = new int[ this.nsets ][ this.assoc ];
         this.data = new int[ this.nsets ][ (this.bsize / 4) * this.assoc ];
 
-        this.nIndice = ( (int)( Math.log10(this.tamanho) ) / (int)( Math.log10(2) ) ) - ( (int)( Math.log10(this.bsize) ) / (int)( Math.log10(2) ) ) - ( (int)Math.log10(this.assoc) / ( (int)Math.log10(2) ) );
-        this.nOffset = (int)( Math.log10(this.bsize) ) / (int)( Math.log10(2) );
+        this.nIndice = (int)( (int)( Math.log10(this.tamanho) ) / ( Math.log10(2) ) ) - (int)( (int)( Math.log10(this.bsize) ) / ( Math.log10(2) ) ) - (int)( (int)( Math.log10(this.assoc) ) / ( Math.log10(2) ) );
+        this.nOffset = (int)( ( Math.log10(this.bsize) ) / ( Math.log10(2) ) );
         this.nTag = 32 - (nIndice + nOffset);
 
     }
@@ -59,9 +59,9 @@ public class Cache{
     @Override
     public String toString(){
         return "Informações sobre a cache criada:\n" +
-               "Nº de Conjuntos: " + this.nsets + " conjuntos\n" +
-               "Tamanho do Bloco: " + this.bsize + " Bytes por bloco\n" +
-               "Grau de Associatividade: " + this.assoc + "-way\n" +
+               "Nº de Conjuntos: " + (this.nsets == 1 ? this.nsets + " conjunto (CACHE TOTALMENTE ASSOCIATIVA)\n" : this.nsets + " conjuntos\n") +
+               "Tamanho do Bloco: " + this.bsize + " Bytes por bloco (" + (this.bsize / 4) + " PALAVRA" + (this.bsize == 4 ? ")\n" : "S)\n" ) +
+               "Grau de Associatividade: " + (this.assoc == 1 ? this.assoc + "-way (MAPEAMENTO DIRETO)\n" : this.assoc + "-way (ASSOCIATIVA POR CONJUNTO)\n") +
                "Política de Substituição: " + (
                                                this.substituicao == 'l' ? "LRU" :
                                                this.substituicao == 'r' ? "FIFO" :
@@ -69,8 +69,8 @@ public class Cache{
                                               ) + "\n" +
                "Tamanho: " + (
                               this.tamanho < (int)(Math.pow(2, 10)) ? this.tamanho + " Bytes" :
-                              this.tamanho < (int)(Math.pow(2, 20)) ? (this.tamanho) / (int)(Math.pow(2, 10)) + "KB" :
-                                                                          (this.tamanho) / (int)(Math.pow(2, 20))  + "MB"
+                              this.tamanho < (int)(Math.pow(2, 20)) ? (this.tamanho) / (int)(Math.pow(2, 10)) + "KB (" + this.tamanho + " Bytes" + ")" :
+                                                                          	   (this.tamanho) / (int)(Math.pow(2, 20))  + "MB (" + this.tamanho + " Bytes " + ")"
                              ) +  "\n" +
                "Tamanho do Índice: " + this.nIndice + " bits\n" +
                "Tamanho do Offset: " + this.nOffset + " bits\n" +
