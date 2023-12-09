@@ -60,7 +60,7 @@ public class Cache{
     public String toString(){
         return "Informações sobre a cache criada:\n" +
                "Nº de Conjuntos: " + (this.nsets == 1 ? this.nsets + " conjunto (CACHE TOTALMENTE ASSOCIATIVA)\n" : this.nsets + " conjuntos\n") +
-               "Tamanho do Bloco: " + this.bsize + " Bytes por bloco (\n" +
+               "Tamanho do Bloco: " + this.bsize + " Bytes por bloco\n" +
                "Grau de Associatividade: " + (this.assoc == 1 ? this.assoc + "-way (MAPEAMENTO DIRETO)\n" : this.assoc + "-way (ASSOCIATIVA POR CONJUNTO)\n") +
                "Política de Substituição: " + (
                                                this.substituicao == 'l' ? "LRU" :
